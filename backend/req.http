@@ -1,0 +1,173 @@
+### Register Customer
+POST http://localhost:5002/auth/register
+Content-Type: application/json
+
+{
+    "name":"Lalith",
+    "email":"lalith@gmail.com",
+    "password":"123456",
+    "phone":"9876543210",
+    "role":"customer"
+}
+
+
+### Register Rider
+POST http://localhost:5002/auth/register
+Content-Type: application/json
+
+{
+    "name":"Rahul",
+    "email":"rahul@gmail.com",
+    "password":"123456",
+    "phone":"9999999999",
+    "role":"rider"
+}
+
+
+### Register Admin
+POST http://localhost:5002/auth/register
+Content-Type: application/json
+
+{
+    "name":"Store Owner",
+    "email":"owner@gmail.com",
+    "password":"123456",
+    "role":"admin"
+}
+
+
+### Login
+POST http://localhost:5002/auth/login
+Content-Type: application/json
+
+{
+    "email":"owner@gmail.com",
+    "password":"123456"
+}
+
+### Login Customer
+POST http://localhost:5002/auth/login
+Content-Type: application/json
+
+{
+  "email":"lalith@gmail.com",
+  "password":"123456"
+}
+
+
+### Profile
+GET http://localhost:5002/auth/profile
+
+### Create Store
+POST http://localhost:5002/store-api/create
+Content-Type: application/json
+
+{
+   "name":"ABC Pharmacy",
+   "category":"pharmacy",
+   "address":"Hyderabad",
+   "location":{
+      "lat":17.385,
+      "lng":78.486
+   }
+}
+
+### Get Stores
+GET http://localhost:5002/store-api/all
+
+### Add Paracetamol
+POST http://localhost:5002/product-api/create
+Content-Type: application/json
+
+{
+  "storeId":"6a2a5d4e6766c402b7c5e0fa",
+  "name":"Paracetamol",
+  "description":"Pain relief medicine",
+  "category":"medicine",
+  "price":50,
+  "image":"💊",
+  "stock":100
+}
+
+###
+
+### Add Bandage
+POST http://localhost:5002/product-api/create
+Content-Type: application/json
+
+{
+  "storeId":"6a2a5d4e6766c402b7c5e0fa",
+  "name":"Bandage",
+  "description":"Medical bandage",
+  "category":"medical",
+  "price":30,
+  "image":"🩹",
+  "stock":200
+}
+
+###
+
+### Add Hand Sanitizer
+POST http://localhost:5002/product-api/create
+Content-Type: application/json
+
+{
+  "storeId":"6a2a5d4e6766c402b7c5e0fa",
+  "name":"Hand Sanitizer",
+  "description":"Alcohol based sanitizer",
+  "category":"hygiene",
+  "price":120,
+  "image":"🧴",
+  "stock":75
+}
+
+###
+
+### Add Vitamin Kit
+POST http://localhost:5002/product-api/create
+Content-Type: application/json
+
+{
+  "storeId":"6a2a5d4e6766c402b7c5e0fa",
+  "name":"Vitamin Kit",
+  "description":"Daily vitamin supplements",
+  "category":"supplements",
+  "price":250,
+  "image":"💉",
+  "stock":50
+}
+
+###
+GET http://localhost:5002/product-api/store/6a2a5d4e6766c402b7c5e0fa
+
+### Create Order
+POST http://localhost:5002/order-api/create
+Content-Type: application/json
+
+{
+  "store":"6a2a5d4e6766c402b7c5e0fa",
+
+  "products":[
+
+    {
+      "product":"6a2adeb46321817336413d7a",
+      "quantity":2
+    },
+
+    {
+      "product":"6a2adeb66321817336413d7b",
+      "quantity":1
+    }
+
+  ],
+
+  "total":220,
+
+  "deliveryAddress":{
+    "street":"Kothapet",
+    "city":"Hyderabad",
+    "pincode":"500035"
+  },
+
+  "paymentMethod":"COD"
+}
