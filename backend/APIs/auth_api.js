@@ -99,11 +99,24 @@ expiresIn:"1d"
 });
 
 res.cookie(
+
 "token",
+
 token,
+
 {
-httpOnly:true
-});
+
+httpOnly:true,
+
+sameSite:"none",
+
+secure:true,
+
+maxAge:24*60*60*1000
+
+}
+
+);
 
 res.json({
 message:"Login success",
@@ -147,7 +160,19 @@ authapp.post(
 "/logout",
 (req,res)=>{
 
-res.clearCookie("token");
+res.clearCookie(
+
+"token",
+
+{
+
+sameSite:"none",
+
+secure:true
+
+}
+
+);
 
 res.send({
 message:"Logged out"

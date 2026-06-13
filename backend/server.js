@@ -26,7 +26,8 @@ const httpServer = createServer(app);
 // socket setup
 export const io = new Server(httpServer,{
   cors:{
-    origin:"http://localhost:5173",
+    //origin:"http://localhost:5173",
+    origin:process.env.CLIENT_URL,
     credentials:true
   }
 });
@@ -34,7 +35,8 @@ export const io = new Server(httpServer,{
 
 // middleware
 app.use(cors({
-  origin:"http://localhost:5173",
+  //origin:"http://localhost:5173",
+  origin:process.env.CLIENT_URL,
   credentials:true
 }));
 
