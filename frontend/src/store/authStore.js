@@ -44,28 +44,21 @@ const useAuthStore = create((set)=>({
   },
 
 
-  logout:async()=>{
+  logout:()=>{
 
-    try{
-
-      await logout();
-
-    }
-    catch(err){
-
-      console.log(err);
-
-    }
+    localStorage.removeItem(
+    "token"
+    );
 
     set({
 
-      user:null,
+     user:null,
 
-      loading:false
+     loading:false
 
-    });
+     });
 
-  }
+}
 
 }));
 

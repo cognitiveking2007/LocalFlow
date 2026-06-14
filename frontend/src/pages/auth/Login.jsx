@@ -32,6 +32,13 @@ async function handleLogin() {
         password
 
       });
+    localStorage.setItem(
+
+        "token",
+
+        res.data.token
+
+       );  
 
     await getProfile();
 

@@ -2,7 +2,7 @@ import exp from "express";
 import { config } from "dotenv";
 import { connect } from "mongoose";
 import cors from "cors";
-import cookieParser from "cookie-parser";
+//import cookieParser from "cookie-parser";
 
 import { createServer } from "http";
 import { Server } from "socket.io";
@@ -40,7 +40,7 @@ app.use(cors({
   credentials:true
 }));
 
-app.use(cookieParser());
+//app.use(cookieParser());
 
 app.use(exp.json());
 

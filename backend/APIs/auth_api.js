@@ -98,7 +98,7 @@ process.env.SECRET_KEY,
 expiresIn:"1d"
 });
 
-res.cookie(
+/*res.cookie(
 
 "token",
 
@@ -116,11 +116,12 @@ maxAge:24*60*60*1000
 
 }
 
-);
+);*/
 
 res.json({
 message:"Login success",
-user
+user,
+token
 });
 
 }
@@ -156,7 +157,7 @@ next(err);
 
 });
 
-authapp.post(
+/*authapp.post(
 "/logout",
 (req,res)=>{
 
@@ -178,4 +179,20 @@ res.send({
 message:"Logged out"
 });
 
+});*/
+
+authapp.post(
+
+"/logout",
+
+(req,res)=>{
+
+res.json({
+
+message:
+"Logged out"
+
 });
+
+}
+);

@@ -3,46 +3,74 @@ import { config } from "dotenv";
 
 config();
 
-export const verifyToken = (...allowedRoles) => {
-  return (req, res, next) => {
+export const verifyToken = (...allowedRoles)=>{
 
-    const token = req.cookies.token;
+  return (req,res,next)=>{
 
-    if (!token) {
+    const authHeader =
+      req.headers.authorization;
+
+    if(
+      !authHeader ||
+      !authHeader.startsWith("Bearer ")
+    ){
+
       return res.status(401).json({
-        message: "Unauthorized. Please login."
+
+        message:
+        "Access denied. Token missing."
+
       });
+
     }
 
-    try {
+    const token =
+      authHeader.split(" ")[1];
 
-      const decoded = jwt.verify(
-        token,
-        process.env.SECRET_KEY
-      );
-      console.log(decoded);
+    try{
 
+      const decoded =
+        jwt.verify(
+          token,
+          process.env.SECRET_KEY
+        );
 
-      if (
+      if(
+
         allowedRoles.length &&
-        !allowedRoles.includes(decoded.role)
-      ) {
+
+        !allowedRoles.includes(
+          decoded.role
+        )
+
+      ){
+
         return res.status(403).json({
+
           message:
-          "Forbidden: Access denied for your role"
+          "Forbidden"
+
         });
+
       }
 
       req.user = decoded;
 
       next();
 
-    } catch (err) {
+    }
+
+    catch(err){
 
       return res.status(401).json({
+
         message:
-        "Invalid or expired token"
+        "Invalid token"
+
       });
+
     }
+
   };
+
 };
