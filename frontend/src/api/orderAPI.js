@@ -18,6 +18,14 @@ export const getOrderById = (id) => {
 
 };
 
+export const getOrderLocation = (id) => {
+
+  return api.get(
+    `/order-api/${id}`
+  );
+
+};
+
 
 export const getOrders = () => {
 
@@ -71,6 +79,5 @@ return api.get(
 );
 
 };
-
 
 

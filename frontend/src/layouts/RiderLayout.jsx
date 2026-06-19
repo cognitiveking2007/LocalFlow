@@ -30,6 +30,11 @@ useAuthStore(
 state=>state.logout
 );
 
+const user=
+useAuthStore(
+state=>state.user
+);
+
 async function handleLogout(){
 
 await logout();
@@ -40,6 +45,12 @@ navigate("/login");
 
 
 useEffect(()=>{
+
+if(!user?._id){
+
+return;
+
+}
 
 const watchId=
 
@@ -53,9 +64,15 @@ socket.emit(
 
 {
 
+riderId:user._id,
+
 lat:position.coords.latitude,
 
-lng:position.coords.longitude
+lng:position.coords.longitude,
+
+accuracy:position.coords.accuracy,
+
+speed:position.coords.speed
 
 }
 
@@ -88,7 +105,7 @@ watchId
 
 };
 
-},[]);
+},[user?._id]);
 
 
 return(

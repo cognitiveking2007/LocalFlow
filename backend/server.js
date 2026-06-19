@@ -15,6 +15,8 @@ import { adminapp } from "./APIs/admin_api.js";
 import { storeapp } from "./APIs/store_api.js";
 import { orderapp } from "./APIs/order_api.js";
 import { productapp } from "./APIs/product_api.js";
+import { OrderModel } from "./models/OrderModel.js";
+import { RiderLocationModel } from "./models/RiderLocationModel.js";
 
 config();
 
@@ -86,9 +88,65 @@ io.on("connection",(socket)=>{
 
 console.log("Connected:",socket.id);
 
-socket.on("locationUpdate",(data)=>{
+socket.on("locationUpdate",async(data)=>{
 
- io.emit("receiveLocation",data);
+try{
+
+const activeOrder =
+await OrderModel.findOne({
+rider:data.riderId,
+status:{
+$in:[
+"assigned",
+"pickedUp",
+"outForDelivery"
+]
+}
+}).sort({
+updatedAt:-1
+});
+
+const locationPayload = {
+riderId:data.riderId,
+orderId:data.orderId || activeOrder?._id,
+lat:data.lat,
+lng:data.lng,
+accuracy:data.accuracy,
+speed:data.speed,
+updatedAt:new Date()
+};
+
+if(data.riderId){
+
+await RiderLocationModel.findOneAndUpdate(
+{
+rider:data.riderId
+},
+{
+rider:data.riderId,
+order:locationPayload.orderId,
+lat:data.lat,
+lng:data.lng,
+accuracy:data.accuracy,
+speed:data.speed
+},
+{
+upsert:true,
+new:true
+}
+);
+
+}
+
+io.emit("receiveLocation",locationPayload);
+io.emit("riderLocationUpdated",locationPayload);
+
+}
+catch(err){
+
+console.log("Location update error:",err.message);
+
+}
 
 });
 

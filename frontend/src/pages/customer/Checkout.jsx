@@ -65,6 +65,12 @@ city:"Hyderabad",
 
 pincode:"500035"
 
+,
+
+lat:17.3687,
+
+lng:78.5247
+
 },
 
 paymentMethod:

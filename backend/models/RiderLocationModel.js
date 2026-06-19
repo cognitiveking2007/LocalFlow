@@ -16,6 +16,12 @@ const riderLocationSchema=new mongoose.Schema({
 
   lng:Number
 
+  ,
+
+  accuracy:Number,
+
+  speed:Number
+
 },{timestamps:true});
 
 export const RiderLocationModel=

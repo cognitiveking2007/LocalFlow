@@ -4,6 +4,9 @@ import { io } from "../server.js";
 import { OrderModel }
 from "../models/OrderModel.js";
 
+import { RiderLocationModel }
+from "../models/RiderLocationModel.js";
+
 import { verifyToken }
 from "../middleware/VerifyToken.js";
 
@@ -347,9 +350,39 @@ req.params.id
 
 );
 
-res.json(
-order
-);
+if(!order){
+
+return res.status(404).json({
+message:"Order not found"
+});
+
+}
+
+const locationFilters = [
+{
+order:order._id
+}
+];
+
+if(order.rider?._id){
+
+locationFilters.push({
+rider:order.rider._id
+});
+
+}
+
+const riderLocation =
+await RiderLocationModel.findOne({
+$or:locationFilters
+}).sort({
+updatedAt:-1
+});
+
+res.json({
+...order.toObject(),
+latestRiderLocation:riderLocation
+});
 
 }
 catch(err){
