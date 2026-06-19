@@ -6,7 +6,8 @@ import {
   FiBarChart2,
   FiSettings,
   FiShoppingBag,
-  FiPlusCircle
+  FiPlusCircle,
+  FiPackage
 }
 from "react-icons/fi";
 
@@ -15,7 +16,10 @@ import {
 }
 from "react-router-dom";
 
-const links = [
+import useAuthStore
+from "../../store/authStore";
+
+const adminLinks = [
 
   {
     name:"Dashboard",
@@ -67,7 +71,62 @@ const links = [
 
 ];
 
+const storeLinks = [
+
+  {
+    name:"Dashboard",
+    icon:<FiHome/>,
+    path:"/store"
+  },
+
+  {
+    name:"Orders",
+    icon:<FiTruck/>,
+    path:"/store/orders"
+  },
+
+  {
+    name:"Products",
+    icon:<FiPackage/>,
+    path:"/store/products"
+  },
+
+  {
+    name:"Riders",
+    icon:<FiUsers/>,
+    path:"/store/riders"
+  },
+
+  {
+    name:"Analytics",
+    icon:<FiBarChart2/>,
+    path:"/store/analytics"
+  },
+
+  {
+    name:"Settings",
+    icon:<FiSettings/>,
+    path:"/store/settings"
+  }
+
+];
+
 function Sidebar(){
+
+  const user =
+  useAuthStore(
+  state=>state.user
+  );
+
+  const links =
+  user?.role==="store"
+  ? storeLinks
+  : adminLinks;
+
+  const subtitle =
+  user?.role==="store"
+  ? "Store Operations"
+  : "Delivery Operations";
 
   return(
 
@@ -126,7 +185,7 @@ function Sidebar(){
 
         <p className="text-slate-400 text-sm mt-1">
 
-          Delivery Operations
+          {subtitle}
 
         </p>
 

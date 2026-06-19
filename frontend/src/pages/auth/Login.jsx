@@ -19,6 +19,11 @@ function Login() {
       state => state.getProfile
     );
 
+  const setUser =
+    useAuthStore(
+      state => state.setUser
+    );
+
   const [email, setEmail] =
     useState("");
 
@@ -40,10 +45,19 @@ function Login() {
         res.data.token
       );
 
-      await getProfile();
+      const profileUser =
+        await getProfile();
 
       const role =
-        res.data.user.role;
+        (profileUser || res.data.user).role;
+
+      if(!profileUser){
+
+        setUser(
+          res.data.user
+        );
+
+      }
 
       if (role === "admin") {
 
@@ -54,6 +68,12 @@ function Login() {
       else if (role === "rider") {
 
         navigate("/rider");
+
+      }
+
+      else if (role === "store") {
+
+        navigate("/store");
 
       }
 

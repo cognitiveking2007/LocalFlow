@@ -1,9 +1,13 @@
 import axios from "axios";
 
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  "http://localhost:5002";
+
 const api = axios.create({
 
   baseURL:
-    import.meta.env.VITE_API_URL
+    API_URL
 
 });
 
@@ -19,8 +23,11 @@ localStorage.getItem(
 
 if(token){
 
+config.headers =
+config.headers || {};
+
 config.headers.Authorization =
-`Bearer ${token}`;
+  `Bearer ${token}`;
 
 }
 

@@ -57,10 +57,12 @@ Content-Type: application/json
 
 ### Profile
 GET http://localhost:5002/auth/profile
+Authorization: Bearer paste-token-here
 
 ### Create Store
 POST http://localhost:5002/store-api/create
 Content-Type: application/json
+Authorization: Bearer paste-admin-token-here
 
 {
    "name":"ABC Pharmacy",
@@ -170,4 +172,56 @@ Content-Type: application/json
   },
 
   "paymentMethod":"COD"
+}
+
+### Register Store Owner
+
+POST http://localhost:5002/auth/register
+Content-Type: application/json
+
+{
+"name":"Apollo Pharmacy",
+"email":"apollo@gmail.com",
+"password":"123456",
+"role":"store"
+}
+
+###
+
+### Login Store Owner
+
+POST http://localhost:5002/auth/login
+Content-Type: application/json
+
+{
+"email":"apollo@gmail.com",
+"password":"123456"
+}
+
+###
+
+### Register Grocery Store
+
+POST http://localhost:5002/auth/register
+Content-Type: application/json
+
+{
+"name":"Ratnadeep Grocery",
+"email":"ratnadeep@gmail.com",
+"password":"123456",
+"role":"store"
+}
+
+###
+
+### Register Bakery
+
+POST http://localhost:5002/auth/register
+Content-Type: application/json
+
+{
+"name":"Sweet Oven Bakery",
+"email":"bakery@gmail.com",
+"password":"123456",
+"role":"store"
 }

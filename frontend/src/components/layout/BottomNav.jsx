@@ -5,7 +5,9 @@ FiShoppingCart,
 FiUser,
 FiTruck,
 FiPackage,
-FiDollarSign
+FiDollarSign,
+FiBarChart2,
+FiSettings
 
 }
 
@@ -330,6 +332,123 @@ isActive
 <FiUser size={22}/>
 
 </NavLink>
+
+</div>
+
+);
+
+}
+
+if(
+
+user.role==="store" ||
+user.role==="admin"
+
+){
+
+const base =
+user.role==="store"
+? "/store"
+: "/admin";
+
+const items =
+user.role==="store"
+? [
+  {
+    to:base,
+    icon:<FiHome size={22}/>
+  },
+  {
+    to:`${base}/orders`,
+    icon:<FiTruck size={22}/>
+  },
+  {
+    to:`${base}/products`,
+    icon:<FiPackage size={22}/>
+  },
+  {
+    to:`${base}/analytics`,
+    icon:<FiBarChart2 size={22}/>
+  },
+  {
+    to:`${base}/settings`,
+    icon:<FiSettings size={22}/>
+  }
+]
+: [
+  {
+    to:base,
+    icon:<FiHome size={22}/>
+  },
+  {
+    to:`${base}/orders`,
+    icon:<FiTruck size={22}/>
+  },
+  {
+    to:`${base}/stores`,
+    icon:<FiPackage size={22}/>
+  },
+  {
+    to:`${base}/riders`,
+    icon:<FiUser size={22}/>
+  },
+  {
+    to:`${base}/settings`,
+    icon:<FiSettings size={22}/>
+  }
+];
+
+return(
+
+<div
+
+className="
+bg-slate-900
+border-t
+border-slate-800
+h-16
+flex
+justify-around
+items-center
+"
+
+>
+
+{
+
+items.map(item=>(
+
+<NavLink
+
+key={item.to}
+
+to={item.to}
+
+className={
+
+({isActive})=>
+
+isActive
+
+?
+
+"text-blue-500"
+
+:
+
+"text-slate-400"
+
+}
+
+>
+
+{item.icon}
+
+</NavLink>
+
+))
+
+}
 
 </div>
 

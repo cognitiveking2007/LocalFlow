@@ -21,6 +21,13 @@ import AssignedOrders from "./pages/rider/AssignedOrders";
 import Earnings from "./pages/rider/Earnings";
 import RiderProfile from "./pages/rider/Profile";
 
+import StoreDashboard from "./pages/store/Dashboard";
+import StoreOrders from "./pages/store/Orders";
+import StoreProducts from "./pages/store/Products";
+import StoreRiders from "./pages/store/Riders";
+import StoreAnalytics from "./pages/store/Analytics";
+import StoreSettings from "./pages/store/Settings";
+
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 
@@ -149,6 +156,75 @@ function App() {
           <ProtectedRoute>
             <RoleRoute role="admin">
               <Settings />
+            </RoleRoute>
+          </ProtectedRoute>
+        }
+      />
+
+
+      {/* Store */}
+
+      <Route
+        path="/store"
+        element={
+          <ProtectedRoute>
+            <RoleRoute role="store">
+              <StoreDashboard />
+            </RoleRoute>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/store/orders"
+        element={
+          <ProtectedRoute>
+            <RoleRoute role="store">
+              <StoreOrders />
+            </RoleRoute>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/store/products"
+        element={
+          <ProtectedRoute>
+            <RoleRoute role="store">
+              <StoreProducts />
+            </RoleRoute>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/store/riders"
+        element={
+          <ProtectedRoute>
+            <RoleRoute role="store">
+              <StoreRiders />
+            </RoleRoute>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/store/analytics"
+        element={
+          <ProtectedRoute>
+            <RoleRoute role="store">
+              <StoreAnalytics />
+            </RoleRoute>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/store/settings"
+        element={
+          <ProtectedRoute>
+            <RoleRoute role="store">
+              <StoreSettings />
             </RoleRoute>
           </ProtectedRoute>
         }

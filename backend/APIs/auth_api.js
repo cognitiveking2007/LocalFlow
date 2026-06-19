@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import { UserModel } from "../models/UserModel.js";
+import { StoreModel } from "../models/StoreModel.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 
 export const authapp=exp.Router();
@@ -35,7 +36,17 @@ user.password,
 user.password=
 hashedPassword;
 
+const createdUser =
 await UserModel.create(user);
+
+if(user.role==="store"){
+
+await StoreModel.create({
+owner:createdUser._id,
+name:createdUser.name
+});
+
+}
 
 res.status(201)
 .json({

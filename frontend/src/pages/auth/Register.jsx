@@ -334,6 +334,12 @@ function Register() {
 
                   </option>
 
+                  <option value="store">
+
+                    Store Owner
+
+                  </option>
+
                 </select>
 
               </div>

@@ -1,8 +1,7 @@
 import { create } from "zustand";
 
 import {
-  getProfile,
-  logout
+  getProfile
 }
 from "../api/authAPI";
 
@@ -11,6 +10,18 @@ const useAuthStore = create((set)=>({
   user:null,
 
   loading:true,
+
+  setUser:(user)=>{
+
+    set({
+
+      user,
+
+      loading:false
+
+    });
+
+  },
 
 
   getProfile:async()=>{
@@ -28,8 +39,10 @@ const useAuthStore = create((set)=>({
 
       });
 
+      return res.data;
+
     }
-    catch(err){
+    catch{
 
       set({
 
@@ -38,6 +51,8 @@ const useAuthStore = create((set)=>({
         loading:false
 
       });
+
+      return null;
 
     }
 
@@ -63,4 +78,3 @@ const useAuthStore = create((set)=>({
 }));
 
 export default useAuthStore;
-
